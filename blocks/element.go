@@ -11,9 +11,11 @@ type Element interface {
 type ElementType string
 
 const (
-	ElementTypeButton       ElementType = "button"
-	ElementTypeSelectUsers  ElementType = "users_select"
-	ElementTypeStaticSelect ElementType = "static_select"
+	ElementTypeButton         ElementType = "button"
+	ElementTypePlainTextInput ElementType = "plain_text_input"
+	ElementTypeSelectUsers    ElementType = "users_select"
+	ElementTypeStaticSelect   ElementType = "static_select"
+	ElementTypeUrlTextInput   ElementType = "url_text_input"
 )
 
 type ElementWrapper struct {
@@ -42,10 +44,14 @@ func (at *ElementWrapper) UnmarshalJSON(data []byte) error {
 	switch t.Type {
 	case ElementTypeButton:
 		item = &ButtonElement{}
-	case ElementTypeStaticSelect:
-		item = &SelectStaticElement{}
+	case ElementTypePlainTextInput:
+		item = &PlainTextInputElement{}
 	case ElementTypeSelectUsers:
 		item = &SelectUsersElement{}
+	case ElementTypeStaticSelect:
+		item = &SelectStaticElement{}
+	case ElementTypeUrlTextInput:
+		item = &UrlTextInputElement{}
 	default:
 		panic(t.Type)
 		//	block = &UnknownBlock{}

@@ -15,11 +15,11 @@ const (
 	BlockTypeContext BlockType = "context"
 	BlockTypeDivider BlockType = "divider"
 	BlockTypeHeader  BlockType = "header"
+	BlockTypeInput   BlockType = "input"
 	BlockTypeSection BlockType = "section"
 
 	//BlockTypeImage    BlockType = "image"
 	//BlockTypeFile     BlockType = "file"
-	//BlockTypeInput    BlockType = "input"
 	//BlockTypeRichText BlockType = "rich_text"
 )
 
@@ -77,8 +77,8 @@ func (at *BlocksWrapper) UnmarshalJSON(data []byte) error {
 			block = &HeaderBlock{}
 		//case "image":
 		//	block = &ImageBlock{}
-		//case "input":
-		//	block = &InputBlock{}
+		case BlockTypeInput:
+			block = &InputBlock{}
 		//case "rich_text":
 		//	block = &RichTextBlock{}
 		case BlockTypeSection:

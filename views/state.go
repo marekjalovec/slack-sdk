@@ -20,10 +20,14 @@ func (at *State) GetValues() map[string]string {
 	for _, value := range at.Values {
 		for actionId, action := range value {
 			switch action.Type {
-			case InteractionActionTypeUsersSelect:
-				result[actionId] = action.SelectedUser
+			case InteractionActionTypePlainTextInput:
+				result[actionId] = action.Value
 			case InteractionActionTypeStaticSelect:
 				result[actionId] = action.SelectedOption.Value
+			case InteractionActionTypeUrlTextInput:
+				result[actionId] = action.Value
+			case InteractionActionTypeUsersSelect:
+				result[actionId] = action.SelectedUser
 			default:
 				panic(action.Type)
 			}

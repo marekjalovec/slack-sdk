@@ -66,16 +66,18 @@ func (at *Interaction) HasButtonAction(actionId string) bool {
 type InteractionActionType string
 
 const (
-	InteractionActionTypeButton       InteractionActionType = "button"
-	InteractionActionTypeUsersSelect  InteractionActionType = "users_select"
-	InteractionActionTypeStaticSelect InteractionActionType = "static_select"
+	InteractionActionTypeButton         InteractionActionType = "button"
+	InteractionActionTypePlainTextInput InteractionActionType = "plain_text_input"
+	InteractionActionTypeStaticSelect   InteractionActionType = "static_select"
+	InteractionActionTypeUrlTextInput   InteractionActionType = "url_text_input"
+	InteractionActionTypeUsersSelect    InteractionActionType = "users_select"
 )
 
 type InteractionAction struct {
 	Type           InteractionActionType `json:"type"`
-	ActionId       string                `json:"action_id"`
-	BlockId        string                `json:"block_id"`
-	ActionTs       string                `json:"action_ts"`
+	ActionId       string                `json:"action_id,omitempty"`
+	BlockId        string                `json:"block_id,omitempty"`
+	ActionTs       string                `json:"action_ts,omitempty"`
 	Value          string                `json:"value,omitempty"`
 	SelectedUser   string                `json:"selected_user,omitempty"`
 	SelectedOption *blocks.OptionObject  `json:"selected_option,omitempty"`
