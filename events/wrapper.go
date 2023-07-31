@@ -1,8 +1,6 @@
 package events
 
 import (
-	"encoding/json"
-
 	slacksdk "github.com/marekjalovec/slack-sdk/client"
 )
 
@@ -17,7 +15,7 @@ func GetWrapperType(r *slacksdk.Request) (WrapperType, error) {
 	var t = struct {
 		Type WrapperType `json:"type"`
 	}{}
-	err := json.Unmarshal(*r.Body, &t)
+	err := r.Unmarshal(&t)
 	if err != nil {
 		return "", err
 	}

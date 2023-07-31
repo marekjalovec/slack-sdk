@@ -11,7 +11,6 @@ import (
 type LambdaRequest struct {
 	RawBody         string               `json:"body"`
 	Headers         LambdaRequestHeaders `json:"headers"`
-	Path            string               `json:"rawPath"`
 	IsBase64Encoded bool                 `json:"isBase64Encoded"`
 }
 
@@ -36,26 +35,12 @@ func (at *LambdaRequest) GetRequest(client *Client) (*Request, error) {
 		return nil, err
 	}
 
-	var rt RequestType
-	switch at.Path {
-	case "/event":
-		rt = RequestTypeEvent
-	case "/interaction":
-		rt = RequestTypeInteraction
-	case "/command":
-		rt = RequestTypeCommand
-	}
-
 	body, err := normalizeRequestBody(at.RawBody)
 	if err != nil {
 		return nil, err
 	}
 
-	return &Request{
-		Type:    rt,
-		Body:    body,
-		rawBody: &at.RawBody,
-	}, nil
+	return NewRequest(body), nil
 }
 
 func normalizeRequestBody(s string) (*[]byte, error) {
