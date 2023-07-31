@@ -17,8 +17,8 @@ const (
 
 type EventLinkShared struct {
 	Type      EventType `json:"type"`
-	User      string    `json:"user"`
-	Channel   string    `json:"channel"`
+	UserId    string    `json:"user"`
+	ChannelId string    `json:"channel"`
 	MessageTs string    `json:"message_ts"`
 	Links     []struct {
 		Url    string `json:"url"`
