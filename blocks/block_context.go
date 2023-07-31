@@ -12,9 +12,18 @@ func (at ContextBlock) BlockType() BlockType {
 }
 
 func NewContextBlock(elements ...*TextObject) *ContextBlock {
+	var e []*TextObject
+	for _, element := range elements {
+		if element == nil {
+			continue
+		}
+
+		e = append(e, element)
+	}
+
 	return &ContextBlock{
 		Type:     BlockTypeContext,
-		Elements: &elements,
+		Elements: &e,
 	}
 }
 

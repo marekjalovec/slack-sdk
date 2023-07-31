@@ -38,7 +38,14 @@ func (at *BlocksWrapper) AddBlocks(blocks ...Block) {
 }
 
 func (at *BlocksWrapper) MarshalJSON() ([]byte, error) {
-	var bytes, err = json.Marshal(at.Items)
+	var items []Block
+	for _, item := range *at.Items {
+		if item != nil {
+			items = append(items, item)
+		}
+	}
+
+	var bytes, err = json.Marshal(items)
 	if err != nil {
 		return nil, err
 	}

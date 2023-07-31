@@ -14,6 +14,10 @@ func (at ActionsBlock) BlockType() BlockType {
 func NewActionsBlock(elements ...Element) *ActionsBlock {
 	var e []*ElementWrapper
 	for _, element := range elements {
+		if element == nil {
+			continue
+		}
+
 		e = append(e, NewElementWrapper(element))
 	}
 
