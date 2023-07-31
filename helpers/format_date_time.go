@@ -21,7 +21,7 @@ https://api.slack.com/reference/surfaces/formatting#date-formatting
 
 func FormatDateTime(t *time.Time, format string) string {
 	if format == "" {
-		format = "{date_short}, {time}"
+		format = "{date_short_pretty}, {time}"
 	}
 	return fmt.Sprintf("<!date^%d^%s|%s>", t.Unix(), format, t.Format(time.RFC3339))
 }
