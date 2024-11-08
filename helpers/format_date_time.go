@@ -20,6 +20,10 @@ https://api.slack.com/reference/surfaces/formatting#date-formatting
 */
 
 func FormatDateTime(t *time.Time, format string) string {
+	if t == nil {
+		return ""
+	}
+
 	if format == "" {
 		format = "{date_short_pretty}, {time}"
 	}
