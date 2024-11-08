@@ -1,8 +1,10 @@
-package client
+package api
 
 import (
 	"encoding/json"
 	"fmt"
+
+	"github.com/marekjalovec/slack-sdk/client"
 )
 
 type UserProfileResponse struct {
@@ -47,8 +49,8 @@ type UserProfileField struct {
 	Alt   string `json:"alt"`
 }
 
-func (at *Client) GetUserProfile(userId string) (*UserProfile, error) {
-	body, err := at.Get("users.profile.get", map[string]string{"user": userId})
+func GetUserProfile(c *client.Client, userId string) (*UserProfile, error) {
+	body, err := c.Get("users.profile.get", map[string]string{"user": userId})
 	if err != nil {
 		return nil, err
 	}
