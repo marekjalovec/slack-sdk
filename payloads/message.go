@@ -18,7 +18,7 @@ type MessageResponse struct {
 	Ok        bool   `json:"ok"`
 	ChannelId string `json:"channel"`
 	Ts        string `json:"ts"`
-	Error     string `json:"error"`
+	Error     string `json:"error,omitempty"`
 }
 
 func NewMessagePayload(channelId string, b *blocks.BlocksWrapper) *MessagePayload {
