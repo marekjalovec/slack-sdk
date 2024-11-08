@@ -9,14 +9,18 @@ import (
 )
 
 type LambdaRequest struct {
-	RawBody         string               `json:"body"`
-	Headers         LambdaRequestHeaders `json:"headers"`
-	IsBase64Encoded bool                 `json:"isBase64Encoded"`
-}
-
-type LambdaRequestHeaders struct {
-	Signature        string `json:"x-slack-signature"`
-	RequestTimestamp string `json:"x-slack-request-timestamp"`
+	RawBody string `json:"body"`
+	Headers struct {
+		Signature        string `json:"x-slack-signature"`
+		RequestTimestamp string `json:"x-slack-request-timestamp"`
+	} `json:"headers"`
+	IsBase64Encoded bool `json:"isBase64Encoded"`
+	RequestContext  struct {
+		RequestId string `json:"requestId"`
+		Http      struct {
+			UserAgent string `json:"userAgent"`
+		} `json:"http"`
+	} `json:"requestContext"`
 }
 
 func (at *LambdaRequest) GetRequest(client *Client) (*Request, error) {
